@@ -8,9 +8,19 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <main>
+      <p>content loaded from API: <b id="name">...</b></p>
+    </main>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <script>
+      (async function() {
+      let text  = await( await fetch(`/api/message`)).text();
+      console.log(text);
+      document.querySelector('#name').textContent = text;
+    }())
+    </script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
